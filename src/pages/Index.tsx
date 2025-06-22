@@ -3,6 +3,14 @@ import { Mail, Phone, MapPin, Download, Github, Linkedin, Code, Database, Briefc
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
+import Lottie from 'lottie-react';
+import codeAnim from '@/lotties/code.json';
+import devAnim from '@/lotties/dev.json';
+import dbAnim from '@/lotties/database.json';
+import testAnim from '@/lotties/testing.json';
+import gitAnim from '@/lotties/git.json';
+import designAnim from '@/lotties/design.json';
+
 
 
 const Index = () => {
@@ -40,8 +48,9 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const iconColors = ['text-blue-400','text-green-400','text-cyan-400','text-yellow-400','text-pink-400','text-rose-400'];
+
   const skills = ['Web Development','Software Development','Database Management','Debug & Testing','Git','Graphic Design'];
+  const lottieIcons = [codeAnim, devAnim, dbAnim, testAnim, gitAnim, designAnim];
   const experiences = [
     { company: 'Linea Computers Srl', role: 'Full-Stack Odoo Developer', period: 'Sept 2024 – Oggi', description: 'Sviluppo su Odoo (Python, XML, JS), App mobile con Xamarin, Gestione DB con PgAdmin, Testing, CI/CD, ottimizzazione, Agile Team' },
     { company: 'Ranocchi Software', role: 'Sviluppatore Software Junior', period: '2022–2023', description: 'Sviluppo gestionale in Cobol, Testing, debug, distribuzione VM' }
@@ -119,35 +128,29 @@ const Index = () => {
             className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
           >
             <Download className="mr-2 h-5 w-5" />
-            {t('Download CV')}
+            {t('Download')}
           </Button>
         </div>
       </div>
     </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">🧠 {t('skills')}</h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {skills.map((skill, index) => (
-              <div key={skill} className="relative bg-white/10 backdrop-blur-md rounded-xl p-6 text-center border border-white/20 transition-all duration-500 hover:scale-105 overflow-hidden group" style={{ animationDelay: `${index * 100}ms` }}>
-                <span className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform skew-x-[-20deg] group-hover:left-full transition-all duration-700 ease-in-out" />
-                <div className={`text-2xl mb-2 ${iconColors[index % iconColors.length]} transition-colors duration-300`}>
-                  {index === 0 && <Code className="mx-auto" />}
-                  {index === 1 && <Briefcase className="mx-auto" />}
-                  {index === 2 && <Database className="mx-auto" />}
-                  {index === 3 && <FileText className="mx-auto" />}
-                  {index === 4 && <Github className="mx-auto" />}
-                  {index === 5 && <Image className="mx-auto" />}
-                </div>
-                <h3 className="font-semibold text-white">{skill}</h3>
+    {/* Skills Section con Lottie */}
+    <section id="skills" className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">🧠 {t('skills')}</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          {skills.map((skill, index) => (
+            <div key={skill} className="relative bg-white/10 backdrop-blur-md rounded-xl p-6 text-center border border-white/20 transition-all duration-500 hover:scale-105 overflow-hidden group" style={{ animationDelay: `${index * 100}ms` }}>
+              <span className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform skew-x-[-20deg] group-hover:left-full transition-all duration-700 ease-in-out" />
+              <div className="text-2xl mb-2 h-20 flex items-center justify-center">
+                <Lottie animationData={lottieIcons[index]} loop={true} className="w-16 h-16" />
               </div>
-            ))}
-          </div>
+              <h3 className="font-semibold text-white mt-2">{skill}</h3>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Experience Section */}
       <section id="experience" className="py-20 px-4 bg-blue-950/80">
@@ -173,24 +176,25 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Education Section */}
+      {/* Education Timeline Section */}
       <section id="education" className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">📚 Formazione</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">📚 {t('education')}</h2>
+          <div className="relative border-l-4 border-cyan-500 ml-4 space-y-10">
             {education.map((edu, index) => (
-              <Card key={index} className="relative bg-blue-900/20 backdrop-blur-md border border-blue-700/40 hover:border-cyan-400 transition-all duration-300 hover:scale-105 overflow-hidden group" style={{ animationDelay: `${index * 100}ms` }}>
-                <span className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform skew-x-[-20deg] group-hover:left-full transition-all duration-700 ease-in-out" />
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold text-cyan-300 mb-2">{edu.institution}</h3>
-                  <h4 className="text-white mb-2">{edu.course}</h4>
-                  <p className="text-blue-200">{edu.status || edu.duration}</p>
-                </CardContent>
-              </Card>
+              <div key={index} className="relative pl-6 group">
+                <div className="absolute left-[-14px] top-0 w-6 h-6 bg-cyan-500 border-4 border-blue-950 rounded-full group-hover:scale-110 transition-transform"></div>
+                <div className="bg-blue-900/40 p-6 rounded-xl shadow-md border border-blue-700/40 hover:border-cyan-400 transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-cyan-300">{edu.institution}</h3>
+                  <h4 className="text-white">{edu.course}</h4>
+                  <p className="text-blue-300 text-sm">{edu.status || edu.duration}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Languages Section */}
       <section id="languages" className="py-20 px-4 bg-blue-950/80">
