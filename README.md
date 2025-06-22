@@ -14,7 +14,7 @@ This is a vibrant, animated, and responsive one-page portfolio website built wit
 ## ✨ Features
 
 - Smooth scroll navigation with section highlighting
-- Hero banner with animated background
+- Hero banner with animated Lightning background
 - Timeline for education & work experience
 - Scroll progress bar and back-to-top button
 - Language selector with emoji flags

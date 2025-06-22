@@ -101,3 +101,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
