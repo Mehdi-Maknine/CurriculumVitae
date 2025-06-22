@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Download, Github, Linkedin, Code, Database, Briefcase, User, FileText, Image, ArrowUp, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -10,6 +10,12 @@ import dbAnim from '@/lotties/database.json';
 import testAnim from '@/lotties/testing.json';
 import gitAnim from '@/lotties/git.json';
 import designAnim from '@/lotties/design.json';
+import Balatro from '@/components/Balatro';
+import TiltedCard from '@/components/TiltedCard';
+import Lightning from '@/components/Lightning';
+import ShapeBlur from '@/components/ShapeBlur';
+import Dither from '@/components/Dither';
+import BlurText from '@/components/BlurText';
 
 
 
@@ -19,6 +25,7 @@ const Index = () => {
   const [activeSection, setActiveSection] = useState('');
   const [scrollProgress, setScrollProgress] = useState(0);
   const { t, i18n } = useTranslation();
+
 
   const handleLanguageChange = (lang) => {
     i18n.changeLanguage(lang);
@@ -47,7 +54,9 @@ const Index = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
+  const handleAnimationComplete = () => {
+    console.log('Animation completed!');
+  };
 
   const skills = ['Web Development','Software Development','Database Management','Debug & Testing','Git','Graphic Design'];
   const lottieIcons = [codeAnim, devAnim, dbAnim, testAnim, gitAnim, designAnim];
@@ -64,7 +73,7 @@ const Index = () => {
   const languages = [
     { name: 'Italiano', flag: '🇮🇹', level: 'Madrelingua' },
     { name: 'Arabo', flag: '🇹🇳', level: 'Madrelingua' },
-    { name: 'Inglese', flag: '🇬🇧', level: 'Fluente' },
+    { name: 'Inglese', flag: '🇪🇳🇬', level: 'Fluente' },
     { name: 'Francese', flag: '🇫🇷', level: 'Fluente' }
   ];
 
@@ -73,10 +82,12 @@ const Index = () => {
 
       <div className="fixed top-0 left-0 h-1 bg-cyan-400 z-50" style={{ width: `${scrollProgress}%` }}></div>
 
+      
+
       {/* Language Switcher - Tiny Flags */}
       <div className="fixed top-4 right-4 z-50 flex gap-1 text-xs">
         <button onClick={() => handleLanguageChange('it')} className={`w-6 h-6 rounded-full text-sm ${i18n.language === 'it' ? 'ring-2 ring-cyan-400' : 'opacity-70'} hover:opacity-100 transition`} title="Italiano">🇮🇹</button>
-        <button onClick={() => handleLanguageChange('en')} className={`w-6 h-6 rounded-full text-sm ${i18n.language === 'en' ? 'ring-2 ring-cyan-400' : 'opacity-70'} hover:opacity-100 transition`} title="English">🇬🇧</button>
+        <button onClick={() => handleLanguageChange('en')} className={`w-6 h-6 rounded-full text-sm ${i18n.language === 'en' ? 'ring-2 ring-cyan-400' : 'opacity-70'} hover:opacity-100 transition`} title="English">ENG</button>
         <button onClick={() => handleLanguageChange('fr')} className={`w-6 h-6 rounded-full text-sm ${i18n.language === 'fr' ? 'ring-2 ring-cyan-400' : 'opacity-70'} hover:opacity-100 transition`} title="Français">🇫🇷</button>
       </div>
 
@@ -97,46 +108,109 @@ const Index = () => {
 
 
       <section className="relative min-h-screen flex items-center justify-center px-4" id="hero">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-800/20 to-cyan-600/20 animate-pulse"></div>
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400/10 rounded-full blur-xl animate-bounce"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-cyan-500/10 rounded-full blur-xl animate-pulse"></div>
+
+        {/* Lightning Background */}
+        <div className="absolute inset-0 z-0">
+          <Lightning
+            hue={220}
+            xOffset={0}
+            speed={1}
+            intensity={1}
+            size={2}
+          />
+        </div>
+       
+        {/* Hero Content */}
+        <div className="text-center z-10 relative flex flex-col items-center justify-center gap-6 mt-12">
+          <div className="relative flex justify-center items-center mb-8">
+        {/* Background ShapeBlur */}
+        <div className="absolute z-0 w-[320px] h-[320px] rounded-full overflow-hidden">
+          <ShapeBlur
+            variation={0}
+            pixelRatioProp={window.devicePixelRatio || 1}
+            shapeSize={0.5}
+            roundness={0.5}
+            borderSize={0.05}
+            circleSize={0.5}
+            circleEdge={1}
+          />
+        </div>
+
+        {/* Foreground TiltedCard */}
+        
+          <TiltedCard
+            imageSrc="mehdi-avatar.jpg"
+            altText="Mehdi Maknine - Full-Stack Developer"
+            captionText="Mehdi Maknine - Dev"
+            containerHeight="300px"
+            containerWidth="300px"
+            imageHeight="300px"
+            imageWidth="300px"
+            rotateAmplitude={19}
+            scaleOnHover={1.25}
+            showMobileWarning={false}
+            showTooltip={true}
+            displayOverlayContent={true}
+            overlayContent="Mehdi Maknine - Dev"
+          />
+
       </div>
 
-      {/* Hero Content */}
-      <div className="text-center z-10 transition-all duration-1000 opacity-100 translate-y-0 animate-fade-in">
-        <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
-          Mehdi Maknine
-        </h1>
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
-          Full-Stack Web & Software Developer
-        </h2>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
-          "Giovane professionista motivato ad apprendere e crescere nel mondo dello sviluppo Full-Stack."
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
-            onClick={() => window.location.href = 'mailto:ordi2000@hotmail.fr'}
-          >
-            <Mail className="mr-2 h-5 w-5" />
-            {t('Contact Me')}
-          </Button>
-          <Button
-            variant="outline"
-            className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
-          >
-            <Download className="mr-2 h-5 w-5" />
-            {t('Download')}
-          </Button>
+          {/* Titoli */}
+          <BlurText
+            text="Mehdi Maknine"
+            delay={250}
+            animateBy="letters"
+            direction="top"
+            onAnimationComplete={handleAnimationComplete}
+            className="text-5xl md:text-7xl font-extrabold text-[#5b5bd4] tracking-tight mb-0"
+          />
+
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
+            Full-Stack Web & Software Developer
+          </h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+            "Giovane professionista motivato ad apprendere e crescere nel mondo dello sviluppo Full-Stack."
+          </p>
+
+          {/* Bottoni */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
+              onClick={() => window.location.href = 'mailto:ordi2000@hotmail.fr'}
+            >
+              <Mail className="mr-2 h-5 w-5" />
+              {t('Contact Me')}
+            </Button>
+            <Button
+              variant="outline"
+              className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
+            >
+              <Download className="mr-2 h-5 w-5" />
+              {t('Download')}
+            </Button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+
+
 
     {/* Skills Section con Lottie */}
     <section id="skills" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
+        {/* <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+        <Dither
+          waveColor={[0.5, 0.5, 0.5]}
+          disableAnimation={false}
+          enableMouseInteraction={true}
+          mouseRadius={0.3}
+          colorNum={4}
+          waveAmplitude={0.3}
+          waveFrequency={3}
+          waveSpeed={0.05}
+        />
+      </div> */}
         <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">🧠 {t('skills')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {skills.map((skill, index) => (
