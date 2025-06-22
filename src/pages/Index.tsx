@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Mail, Phone, MapPin, Download, Github, Linkedin, Code, Database, Briefcase, User, FileText } from 'lucide-react';
+import { Mail, Phone, MapPin, Download, Github, Linkedin, Code, Database, Briefcase, User, FileText, Image } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
